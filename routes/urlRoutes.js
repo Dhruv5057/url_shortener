@@ -28,4 +28,18 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.get("/:shortCode", async (req, res) => {
+    // find shortCode in database
+    // get originalUrl
+    // redirect
+       const url = await Url.findOne({
+        shortCode: req.params.shortCode
+    });
+    console.log(url);
+
+    console.log(req.params.shortCode);
+
+    res.redirect(url.originalUrl);
+});
+
 export default router;
