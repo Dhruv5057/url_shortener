@@ -29,14 +29,18 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/:shortCode", async (req, res) => {
-    // find shortCode in database
-    // get originalUrl
-    // redirect
-       const url = await Url.findOne({
+
+    const url = await Url.findOne({
         shortCode: req.params.shortCode
     });
-    console.log(url);
 
+    if (!url) {
+        return res.status(404).json({
+            message: "Short URL not found"
+        });
+    }
+
+    console.log(url);
     console.log(req.params.shortCode);
 
     res.redirect(url.originalUrl);
