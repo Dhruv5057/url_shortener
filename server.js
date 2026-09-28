@@ -1,13 +1,15 @@
 import "dotenv/config";
 import connectDB from "./config/db.js";
+import cors from "cors";
 import urlRoutes from "./routes/urlRoutes.js";
 import logger from "./middleware/logger.js";
 import express from "express";
 import authRoutes from "./routes/authRoutes.js";
 connectDB();
-
+    
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(logger);
 app.use("/api/auth", authRoutes);
 const PORT = 3000;
